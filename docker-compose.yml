@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  django_project:
+    build: .
+    command:  bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  db:
