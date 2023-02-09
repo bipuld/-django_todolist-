@@ -5,5 +5,35 @@
 {% endblock title %}
 
 {% block body %}
-
+</br>
+<form method="post">
+    <div class="form-group mt-3">
+      <label for="exampleInputEmail1">Your Task </label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task">
+      <small id="emailHelp" class="form-text text-muted"></small>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% comment %} table form {% endcomment %}
+</br>
+<table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">task</th>
+        <th scope="col">status</th>
+        <th scope="col">Editable</th>
+        <th scope="col">delete</th>
+      
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+  </table>
 {% endblock body %}
