@@ -1,39 +1,125 @@
 {% extends 'base.html' %}
 
 {% block title %}
- Task
+ Todolist
 {% endblock title %}
 
 {% block body %}
-</br>
-<form method="post">
-    <div class="form-group mt-3">
-      <label for="exampleInputEmail1">Your Task </label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Task">
-      <small id="emailHelp" class="form-text text-muted"></small>
+{% if messages %}
+  {% for msg in messages %}
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+      <strong>{{msg}}!</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span> 
+      </button>
     </div>
-  
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-{% comment %} table form {% endcomment %}
+  {% endfor %}
+{% endif %}
+
+{% comment %} input from option {% endcomment %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-4">
+      <form method="POST" action="{% url 'task' %}" class="animated fadeIn">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" name="Task_name" class="form-control" placeholder="New Task">
+        </div>
+        {% comment %} choices feild {% endcomment %}
+        <div class="form-group">
+          <select class="form-control" id="effort" name="effort">
+            <option value="Myself">Myself</option>
+            <option value="Other">Other</option>
+            <option value="Task">Task</option>
+          </select>
+        </div>        
+        <button type="submit" class="btn btn-sm btn-secondary btn-block" style="padding: 0.25rem 0.5rem !important ; " >Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 </br>
-<table class="table mt-4">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">task</th>
-        <th scope="col">status</th>
-        <th scope="col">Editable</th>
-        <th scope="col">delete</th>
-      
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-  </table>
+<section class="intro  height: 100%;">
+  <div class="bg-image h-100" style="background-color: #f5f7fa;">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body p-0">
+                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative; ">
+                  <table class="table table-striped mb-0">
+                    <thead style="background-color: #002d72; text-primary">
+                      <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">Effort</th>                       
+                        <th scope="col">Status</th>
+                        <th scope="col">Editable</th>
+                        <th scope="col">Deletable</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+{% if task %}
+                  {% for i in  task %}
+{% if i.status %}
+<tr>
+  <td>{{i.id}}</td>
+  <td>{{i.Task_name}}</td>
+  <td>{{i.effort}}</td>
+  <td>Completed</td>
+  <td>Editable</td>
+  <td>Delete</td>
+</tr>
+{% else %}
+<tr>
+  <td>{{i.id}}</td>
+  <td>{{i.Task_name}}</td>
+  <td>{{i.effort}}</td>
+  <td>Incompleted</td>
+  <td>Editable</td>
+  <td>Delete</td>
+</tr>
+{% endif %}
+                    
+                      {% endfor %}
+{% endif %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% comment %} pagination start here {% endcomment %}
+<nav aria-label="Page navigation example" class="mt-4 ml-3">
+  <ul class="pagination pagination-circle pg-blue">
+    <li class="page-item disabled"><a class="page-link">First</a></li>
+    <li class="page-item disabled">
+      <a class="page-link" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item active"><a class="page-link">1</a></li>
+    <li class="page-item"><a class="page-link">2</a></li>
+    <li class="page-item"><a class="page-link">3</a></li>
+    <li class="page-item"><a class="page-link">4</a></li>
+    <li class="page-item"><a class="page-link">5</a></li>
+    <li class="page-item">
+      <a class="page-link" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <li class="page-item"><a class="page-link">Last</a></li>
+  </ul>
+</nav>
+
+
 {% endblock body %}
