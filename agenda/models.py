@@ -9,10 +9,11 @@ class Task(models.Model):
         ('Other', 'Other'),
         ('Task', 'Task'),
     )
+    # sno=models.AutoField(primary_key=True)
     Task_name = models.CharField(max_length=300)
     status=models.BooleanField(default=False)
     effort=models.CharField(choices=work_ch,max_length=150,default="Myself")
-    Time = models.DateTimeField(default=timezone.now)
+    Time = models.DateTimeField(default=datetime.now,blank=True)
     def __str__(self):
         return self.Task_name + "-" + str(self.status)
       

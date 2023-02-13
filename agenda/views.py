@@ -4,6 +4,14 @@ from django.contrib import messages
 from agenda.forms import TaskForm
 from django.core.paginator import Paginator
 # Create your views here.
+def home(request):
+    context={
+        
+        'pass':"this is base page"
+        
+    }
+    return render (request,'home.html', context)
+
 def task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -23,10 +31,14 @@ def task(request):
             
         }
         return render(request, 'todolist.html',context)
-def home(request):
+def contact(request):
     context={
-        
-        'pass':"this is base page"
-        
+        'greet':"welcome to Contact-page"
     }
-    return render (request,'home.html', context)
+    return render(request, 'contact.html',context)
+
+def about(request):
+    context={
+        'greet':"welcome to about-page"
+    }
+    return render(request, 'about.html',context)

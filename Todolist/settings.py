@@ -71,13 +71,15 @@ DATABASES = {
     #wee are using postgres sql instead of sqlite
 # this is by using postgessql 
 'default': { 
+     
     'ENGINE':'django.db.backends.postgresql',
-    'NAME':'Todolist_db',
+    'NAME':'task_db',
     'USER':'postgres',
     'PASSWORD':'123456',
     'HOST':'localhost',
-    }
-}
+    
+}}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
