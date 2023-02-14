@@ -19,7 +19,7 @@
 {% comment %} input from option {% endcomment %}
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-lg-4">
+    <div class="col-lg-6">
       <form method="POST" action="{% url 'task' %}" class="animated fadeIn">
         {% csrf_token %}
         <div class="form-group">
@@ -31,16 +31,27 @@
             <option value="Other">Other</option>
             <option value="Task">Task</option>
           </select>
-        </div>        
+        </div>      
+        <div class="form-check"   >
+          <input class="form-check-input" type="radio" name="status" value="completed" id="completed">
+          <label class="form-check-label" for="completed">
+            <span class="badge badge-success">Completed</span>
+          </label>
+        </div> 
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="status" value="incompleted" id="incompleted" checked>
+          <label class="form-check-label" for="incompleted">
+            <span class="badge badge-danger">Incomplete</span>
+          </label>
+        </div>
         <button type="submit" class="btn btn-lg btn-primary btn-block" style="border-radius: 25px; font-size: 18px; font-weight: bold;">Add Task</button>
       </form>
     </div>
   </div>
 </div>
 
-</br>
 {% comment %} table-code {% endcomment %}
-<section class="intro height-100vh">
+<section class="intro height-100vh mt-3">
   <div class="bg-image h-100">
     <div class="mask d-flex align-items-center h-100">
       <div class="container">
@@ -68,17 +79,18 @@
                           <td>{{ i.effort }}</td>
                           <td>
                             {% if i.status %}
-                              <span class="badge bg-success">Completed</span>
-                            {% else %}
-                              <span class="badge bg-danger">Incomplete</span>
-                            {% endif %}
+                            <button type="button" class="btn btn-sm btn-success"><i class="fas fa-check me-2"></i><a href={% url 'as_incompleted' i.id %}> Completed</a></button>
+                          {% else %}
+                            <button type="button" class="btn btn-sm btn-danger"><i class="fas fa-times me-2"></i><a href={% url 'as_completed'  i.id %} > Incomplete</a></button>
+                          {% endif %}
+                          
                           </td>
                           <td>
                             <button type="submit" class="btn btn-sm btn-primary me-2">
-                              <i class="fas fa-edit"></i> Edit
+                              <i class="fas fa-edit"></i><a href="{% url 'edit' i.id %}"> Edit </a>
                             </button>
                             <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
-                              <i class="fas fa-trash-alt"></i> Delete
+                              <i class="fas fa-trash-alt"></i><a href={% url 'delete' i.id %}>Delete</a> 
                             </button>
                           </td>
                         </tr>

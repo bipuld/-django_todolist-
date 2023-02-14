@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+ Edit-task 
+{% endblock title %}
+{% block body %}
+{% comment %} messages {% endcomment %}
+{% if messages %}
+  {% for msg in messages %}
+    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+      <strong>{{msg}}!</strong> 
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span> 
+      </button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <form method="POST" class="animated fadeIn">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" name="Task_name" value="{{task_obj.Task_name}}" class="form-control form-control-lg border-0" placeholdervalue="{{task_obj.Task_name}}" style="border-radius: 25px; background-color: #f5f5f5;">
+          </div>
+          <div class="form-group">
+            <select class="form-control form-control-lg border-0" value="{{task_obj.effort}}" placeholdervalue="{{task_obj.Task_name}}" id="effort" name="effort" style="border-radius: 25px; background-color: #f5f5f5;">
+              <option value="Myself">Myself</option>
+              <option value="Other">Other</option>
+              <option value="Task">Task</option>
+            </select>
+          </div>      
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" value="completed"  id="completed">
+            <label class="form-check-label" for="completed">
+              <span class="badge badge-success">Completed</span>
+            </label>
+          </div> 
+        
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" value="incompleted" id="incompleted" checked>
+            <label class="form-check-label" for="incompleted">
+              <span class="badge badge-danger">Incomplete</span>
+            </label>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary btn-block" style="border-radius: 25px; font-size: 18px; font-weight: bold;">Update Task</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
