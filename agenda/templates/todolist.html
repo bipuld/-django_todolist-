@@ -68,6 +68,7 @@
                         <th scope="col">Effort</th>
                         <th scope="col">Status</th>
                         <th scope="col">Actions</th>
+                      
                       </tr>
                     </thead>
                     <tbody>
@@ -75,22 +76,25 @@
                         <tr>
                           <td>{{ i.id }}</td>
                           <td>{{ i.Task_name }}</td>
-                          <td>{{ i.Task_name }}</td>
                           <td>{{ i.effort }}</td>
                           <td>
                             {% if i.status %}
-                            <button type="button" class="btn btn-sm btn-success"><i class="fas fa-check me-2"></i><a href={% url 'as_incompleted' i.id %}> Completed</a></button>
-                          {% else %}
-                            <button type="button" class="btn btn-sm btn-danger"><i class="fas fa-times me-2"></i><a href={% url 'as_completed'  i.id %} > Incomplete</a></button>
+                            <button type="button" class="btn btn-sm btn-success rounded-pill">
+                              <i class="fas fa-check me-2"></i><a href={% url 'as_incompleted' i.id %} class="text-white fw-bold">Completed</a>
+                            </button>
+                            {% else %}
+                          <button type="button" class="btn btn-sm btn-danger rounded-pill">
+                            <i class="fas fa-times me-2"></i><a href={% url 'as_completed'  i.id %} class="text-white fw-bold">Incomplete</a>
+                          </button>
                           {% endif %}
                           
                           </td>
                           <td>
-                            <button type="submit" class="btn btn-sm btn-primary me-2">
-                              <i class="fas fa-edit"></i><a href="{% url 'edit' i.id %}"> Edit </a>
+                            <button type="submit" class="btn btn-sm btn-primary me-2 rounded-pill">
+                              <i class="fas fa-edit"></i><a href="{% url 'edit' i.id %}" class="text-white fw-bold">Edit</a>
                             </button>
-                            <button type="submit" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">
-                              <i class="fas fa-trash-alt"></i><a href={% url 'delete' i.id %}>Delete</a> 
+                            <button type="submit" class="btn btn-sm btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#delete-modal">
+                              <i class="fas fa-trash-alt"></i><a href={% url 'delete' i.id %} class="text-white fw-bold">Delete</a> 
                             </button>
                           </td>
                         </tr>

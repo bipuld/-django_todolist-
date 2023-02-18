@@ -7,8 +7,25 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ml-auto">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        {% if user.is_authenticated %} 
+        <div class="nav-item nav-link" href="#">
+          <i class="fas fa-sign-out-alt"></i> {{user.username}}
+        </div>
+        <a class="nav-item nav-link" href="{% url 'logout' %}">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+        <i class="fas fa-sign-out-alt"></i><strong> </strong>
+        {% else %}
+        <a class="nav-item nav-link" href="{% url 'login' %}">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+        <a class="nav-item nav-link" href="{% url 'signup' %}">
+          <i class="fas fa-user-plus"></i> Sign up
+        </a>
+      {% endif %}
+      
         <a class="nav-item nav-link active" href="#">Home</a>
         <a class="nav-item nav-link" href="{% url 'task' %}">Todo List</a>
         <a class="nav-item nav-link" href="{% url 'contact' %}">Contact Us</a>            

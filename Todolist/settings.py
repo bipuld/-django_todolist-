@@ -25,7 +25,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'agenda.apps.AgendaConfig' #register app
+    'agenda.apps.AgendaConfig',#register app,
+    'userapp.apps.UserappConfig', #register user as app config
+    'phonenumber_field',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    
 ]
 
 MIDDLEWARE = [
@@ -73,7 +78,7 @@ DATABASES = {
 'default': { 
      
     'ENGINE':'django.db.backends.postgresql',
-    'NAME':'task_db',
+    'NAME':'Todolist_db',
     'USER':'postgres',
     'PASSWORD':'123456',
     'HOST':'localhost',
@@ -119,7 +124,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #makin gstatic root director
 STATICFILES_DIRS = [  #registering static file on django
     BASE_DIR / 'static'
 ]
+# this is used to setup media files 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL='/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# for crispy form
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+LOGIN_REDIRECT_URL = 'task' #aFTER LOGIN REDIRECT IN TODOLIST PAGE
+LOGIN_URL='login'

@@ -3,6 +3,7 @@ from agenda.models import Task
 from django.contrib import messages
 from agenda.forms import TaskForm
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def home(request):
     context={
@@ -12,11 +13,12 @@ def home(request):
     }
     return render (request,'home.html', context)
 
+@login_required
 def task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
-        if form.is_valid():
-            form.save()
+        if form.is_valid():          
+           form.save()#this task is used for only vlaid user who save the task they are only allowed to see that
         messages.success(request,"New task added successfully")
         return redirect('task')
     else:
@@ -32,18 +34,21 @@ def task(request):
         }
         return render(request, 'todolist.html',context)
 # this funciton is used to marks the incompleted task as compted task
+@login_required
 def as_completed(request,task_id):
     task=Task.objects.get(pk=task_id)
     task.status=True
     task.save()
     return redirect('task')
-# this fucntion is used to make the compled task as Incomplete task
+# this fucntion is used to make the compled task as Incomplete 
+@login_required
 def as_incompleted(request,task_id):
     task=Task.objects.get(pk=task_id)
     task.status=False
     task.save()
     return redirect('task')
 # this is used to delete a task
+@login_required
 def deleted(request,task_id):
     task=Task.objects.get(pk=task_id)
     task_name=task.Task_name
@@ -52,6 +57,7 @@ def deleted(request,task_id):
     return redirect('task')
 
 # this is used to edit the task list 
+@login_required
 def edit_task(request,task_id):
     if request.method == 'POST':
         task=Task.objects.get(pk=task_id)
@@ -65,24 +71,13 @@ def edit_task(request,task_id):
         task=Task.objects.get(pk=task_id)
         return render(request,'edit.html',{'task_obj':task})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+@login_required
 def contact(request):
     context={
         'greet':"welcome to Contact-page"
     }
     return render(request, 'contact.html',context)
+@login_required
 def about(request):
     context={
         'greet':"welcome to about-page"
