@@ -5,15 +5,16 @@
 {% block body %}
 {% comment %} messages {% endcomment %}
 {% if messages %}
-  {% for msg in messages %}
-    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-      <strong>{{msg}}!</strong> 
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span> 
+        <span aria-hidden="true">&times;</span>
       </button>
     </div>
   {% endfor %}
 {% endif %}
+
 
 <div class="container mt-5">
     <div class="row justify-content-center">

@@ -1,7 +1,83 @@
 {% extends 'base.html' %}
+
 {% block title %}
-    Contact
+    Contact Us
 {% endblock title %}
+
 {% block body %}
-<h6>{{greet}}
+    {% comment %} form message {% endcomment %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% comment %} contact form {% endcomment %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-5">Get in Touch</h2>
+                        <form method="POST" action="{% url 'contact' %}">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            {% comment %} <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone" required>
+                            </div> {% endcomment %}
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .card {
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            color: #212529;
+        }
+
+        /* Add custom styles for phone input */
+        #phone {
+            padding-left: 40px;
+            background-image: url("https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/phone-24.png");
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            background-size: auto 24px;
+        }
+    </style>
 {% endblock body %}

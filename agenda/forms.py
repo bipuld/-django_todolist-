@@ -1,5 +1,5 @@
 from django import forms
-from agenda.models import Task
+from agenda.models import Task,Contact
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -9,4 +9,10 @@ class TaskForm(forms.ModelForm):
             'status': forms.CheckboxInput()
         }
         
+class ContactForm(forms.ModelForm):
     
+    class Meta:
+        model = Contact
+        fields=['name','email','subject','message']
+        
+        

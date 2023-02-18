@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'crispy_bootstrap5',
-    
+    'ckeditor',    
 ]
 
 MIDDLEWARE = [
@@ -78,7 +78,7 @@ DATABASES = {
 'default': { 
      
     'ENGINE':'django.db.backends.postgresql',
-    'NAME':'Todolist_db',
+    'NAME':'TASK',
     'USER':'postgres',
     'PASSWORD':'123456',
     'HOST':'localhost',
@@ -139,3 +139,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGIN_REDIRECT_URL = 'task' #aFTER LOGIN REDIRECT IN TODOLIST PAGE
 LOGIN_URL='login'
+# for ckeditor
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
