@@ -50,23 +50,32 @@ def task(request):
 @login_required
 def as_completed(request,task_id):
     task=Task.objects.get(pk=task_id)
-    task.status=True
-    task.save()
+    if task.owner == request.user:
+        task.status=True
+        task.save()
+    else:
+        messages.error(request,'Acess restricted !')        
     return redirect('task')
 # this fucntion is used to make the compled task as Incomplete 
 @login_required
 def as_incompleted(request,task_id):
     task=Task.objects.get(pk=task_id)
-    task.status=False
-    task.save()
+    if task.owner == request.user:
+        task.status=False
+        task.save()
+    else:
+        messages.error(request,'Acess restricted !')        
     return redirect('task')
 # this is used to delete a task
 @login_required
 def deleted(request,task_id):
     task=Task.objects.get(pk=task_id)
-    task_name=task.Task_name
-    task.delete()
-    messages.success(request,task.Task_name + ' - deleted successfully')
+    if  task.owner == request.user:
+        task_name=task.Task_name
+        task.delete()
+        messages.success(request,task.Task_name + ' - deleted successfully')
+    else:
+        messages.error(request,'You do not have permission to delete')
     return redirect('task')
 
 # this is used to edit the task list 

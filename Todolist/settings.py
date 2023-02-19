@@ -142,3 +142,12 @@ LOGIN_URL='login'
 # for ckeditor
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
+
+
+
+# for email reset password
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend',
+# EMAIL_HOST='smtp.gmail.com',
+# EMAIL_PORT='587'
+# EMAIL_USE_TLS=True
+# EMAIL_HOST_USER='dawadirishab@gmail.com'

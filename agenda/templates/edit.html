@@ -19,6 +19,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-lg-6">
+        {% if task_obj.owner == request.user %}
         <form method="POST" class="animated fadeIn">
           {% csrf_token %}
           <div class="form-group">
@@ -47,6 +48,10 @@
           </div>
           <button type="submit" class="btn btn-lg btn-primary btn-block" style="border-radius: 25px; font-size: 18px; font-weight: bold;">Update Task</button>
         </form>
+        {% else %}
+        <center><strong>You are not allowed to edit the task</strong></center>
+        {% endif %}
+
       </div>
     </div>
   </div>

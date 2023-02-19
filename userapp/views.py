@@ -9,7 +9,7 @@ def signup(request):
         signup_form=CustomForm(request.POST)
         if signup_form.is_valid():
             signup_form.save()
-        messages.success(request, "Your account has been sucessfully created.")
+        messages.success(request, ("Your account has been sucessfully created."))
         return redirect('task')
     else:
         signup_form=CustomForm()
